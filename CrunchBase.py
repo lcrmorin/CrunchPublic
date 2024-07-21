@@ -1,5 +1,16 @@
+#%pip install crunch-cli --upgrade
+#!crunch setup --notebook datacrunch lcrm-base --token HHBv0wVpzAmEuJjQ6vk3T5IYHIRbxeOV10SBshvusyWlzDfn2Bou1gxFK6Pt0ZbN
+
+import os, joblib
+import pandas as pd, numpy as np
+import crunch
+
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.linear_model import LinearRegression
+
+
+#crunch = crunch.load_notebook()
+#X_train, y_train, X_test = crunch.load_data()
 
 def get_model_path(model_directory_path: str):
     model_path = os.path.join(model_directory_path, "model.joblib")
@@ -38,3 +49,5 @@ def infer(
     preds = pd.DataFrame(model.predict(X_test[feature_column_names]), columns=prediction_column_names)
         
     return pd.concat([ids, preds], axis=1)
+
+#crunch.test()
